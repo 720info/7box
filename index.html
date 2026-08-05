@@ -77,20 +77,31 @@
         <h1 class="title">域名迁移通知</h1>
         <p class="tip-text">我们已更换全新永久域名，当前旧域名仅做过渡使用，后续将会停止服务。</p>
         <p class="tip-text">请保存下方新地址访问本站：</p>
-        <div class="new-link">https://720info.github.io/</div>
+        <div class="new-link">https://720info.github.io</div>
         <button class="jump-btn" onclick="goNewSite()">立即前往新站点</button>
         <p class="auto-desc">5秒后将自动跳转，如无响应请点击上方按钮</p>
     </div>
 
     <script>
-        const target = "https://720info.github.io/" + window.location.pathname + window.location.search + window.location.hash;
-        // 点击按钮跳转
+        // 修正：去掉/blog，目标根地址
+        const baseUrl = "https://720info.github.io";
+        const path = window.location.pathname + window.location.search + window.location.hash;
+        let targetUrl;
+
+        // 解决斜杠冲突，避免原地刷新
+        if(path === "" || path === "/"){
+            targetUrl = baseUrl;
+        }else{
+            targetUrl = baseUrl + path;
+        }
+
+        // 按钮跳转
         function goNewSite() {
-            window.location.href = target;
+            window.location.href = targetUrl;
         }
         // 5秒自动跳转
         setTimeout(()=>{
-            window.location.href = target;
+            window.location.href = targetUrl;
         }, 5000);
     </script>
 </body>
