@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>域名迁移通知</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: system-ui, -apple-system, sans-serif;
+        }
+        body {
+            min-height: 100vh;
+            background-color: #f5f7fa;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .box {
+            background: #fff;
+            max-width: 520px;
+            width: 100%;
+            padding: 48px 36px;
+            border-radius: 16px;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+            text-align: center;
+        }
+        .title {
+            font-size: 26px;
+            color: #222;
+            margin-bottom: 16px;
+            font-weight: 600;
+        }
+        .tip-text {
+            color: #555;
+            font-size: 16px;
+            line-height: 1.7;
+            margin-bottom: 12px;
+        }
+        .new-link {
+            background: #f0f4ff;
+            color: #2563eb;
+            padding: 12px 16px;
+            border-radius: 8px;
+            font-family: monospace;
+            font-size: 15px;
+            margin: 24px 0;
+            word-break: break-all;
+        }
+        .jump-btn {
+            display: inline-block;
+            background-color: #2563eb;
+            color: white;
+            border: none;
+            font-size: 17px;
+            padding: 14px 40px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            margin-top: 8px;
+        }
+        .jump-btn:hover {
+            background-color: #1d4ed8;
+        }
+        .auto-desc {
+            margin-top: 20px;
+            font-size: 14px;
+            color: #888;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <h1 class="title">域名迁移通知</h1>
+        <p class="tip-text">我们已更换全新永久域名，当前旧域名仅做过渡使用，后续将会停止服务。</p>
+        <p class="tip-text">请保存下方新地址访问本站：</p>
+        <div class="new-link">https://720info.github.io</div>
+        <button class="jump-btn" onclick="goNewSite()">立即前往新站点</button>
+        <p class="auto-desc">5秒后将自动跳转，如无响应请点击上方按钮</p>
+    </div>
+
+    <script>
+        // 修正：去掉/blog，目标根地址
+        const baseUrl = "https://720info.github.io";
+        const path = window.location.pathname + window.location.search + window.location.hash;
+        let targetUrl;
+
+        // 解决斜杠冲突，避免原地刷新
+        if(path === "" || path === "/"){
+            targetUrl = baseUrl;
+        }else{
+            targetUrl = baseUrl + path;
+        }
+
+        // 按钮跳转
+        function goNewSite() {
+            window.location.href = targetUrl;
+        }
+        // 5秒自动跳转
+        setTimeout(()=>{
+            window.location.href = targetUrl;
+        }, 5000);
+    </script>
+</body>
+</html>
